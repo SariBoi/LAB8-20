@@ -1,10 +1,10 @@
-#---------------------------------------
+# ---------------------------------------
 #  User Experience
-#    Student C
-#---------------------------------------
+#    Sarim Naveed
+# ---------------------------------------
 
 
-#---------------------------------------
+# ---------------------------------------
 
 def choose_difficulty():
     """
@@ -14,13 +14,14 @@ def choose_difficulty():
     Returns:
     - str: Valid difficulty levels are ('easy', 'medium', 'hard').
     """
-    #------------------------
-    # Add your code here
-    #------------------------
-    raise NotImplementedError("This function is not implemented yet.")
-    #------------------------
+    # ------------------------
+    difficulty = input("Please choose a difficulty from 'easy' 'medium' and 'hard': ")
+    return difficulty
 
-#---------------------------------------
+    # ------------------------
+
+
+# ---------------------------------------
 
 def display_leaderboard(leaderboard):
     """
@@ -31,15 +32,23 @@ def display_leaderboard(leaderboard):
 
     Returns: None
 
-    The function sorts the leaderboard by scores in descending order and prints the names and scores of the top players. If the leaderboard is empty, it prints a message indicating that there are no scores to display.
+    The function sorts the leaderboard by scores in descending order and prints the names and scores of the top
+    players. If the leaderboard is empty, it prints a message indicating that there are no scores to display.
     """
-    #------------------------
-    # Add your code here
-    #------------------------
-    raise NotImplementedError("This function is not implemented yet.")
-    #------------------------
+    # ------------------------
+    if leaderboard != {}:
+        sorted_leaderboard = sorted(leaderboard.items(), key=lambda item: item[1], reverse=True)
 
-#---------------------------------------
+        for key, value in sorted_leaderboard:
+            print(f"{key}: {value}")
+
+    else:
+        print("There are no scores to display. Please play to set records!")
+
+    # ------------------------
+
+
+# ---------------------------------------
 
 def save_score(player_name, score, file_path='scores.txt'):
     """
@@ -52,13 +61,15 @@ def save_score(player_name, score, file_path='scores.txt'):
 
     Returns: None
     """
-    #------------------------
-    # Add your code here
-    #------------------------
-    raise NotImplementedError("This function is not implemented yet.")
-    #------------------------
+    # ------------------------
+    file = open(file_path, 'a')
+    file.write(f"{player_name}:{score}")
+    file.close()
 
-#---------------------------------------
+    # ------------------------
+
+
+# ---------------------------------------
 
 def load_top_scores(file_path='scores.txt'):
     """
@@ -70,13 +81,26 @@ def load_top_scores(file_path='scores.txt'):
     Returns:
     - dict: The leaderboard dictionary with player names as keys and scores as values.
     """
-    #------------------------
-    # Add your code here
-    #------------------------
-    raise NotImplementedError("This function is not implemented yet.")
-    #------------------------
+    # ------------------------
+    leaderboard = {}
+    file = open(file_path, 'r')
 
-#---------------------------------------
+    for line in file:
+        line = line.strip()
+        if line:
+            score_str = line.split(":")
+            name = score_str[0]
+            score = int(score_str[1])
+            leaderboard[name] = score
+
+    file.close()
+
+    return leaderboard
+
+    # ------------------------
+
+
+# ---------------------------------------
 
 def provide_feedback(is_correct):
     """
@@ -91,17 +115,21 @@ def provide_feedback(is_correct):
     - is it correct?   "Well done!"
     - is it incorrect? "Sorry, that's incorrect."
     """
-    #------------------------
-    # Add your code here
-    #------------------------
-    raise NotImplementedError("This function is not implemented yet.")
-    #------------------------
+    # ------------------------
+    if is_correct:
+        print("Well done! That's the correct answer!")
 
-#---------------------------------------
+    else:
+        print("Sorry, that's incorrect.")
+    # ------------------------
+
+
+# ---------------------------------------
 
 def fifty_fifty_lifeline(correct_answer, options):
     """
-    Provides a 50/50 lifeline by removing two incorrect answers, leaving the correct answer and one other incorrect answer.
+    Provides a 50/50 lifeline by removing two incorrect answers, leaving the correct answer and one other incorrect
+    answer.
 
     Parameters:
     - correct_answer (str): The correct answer to the current question.
@@ -110,15 +138,22 @@ def fifty_fifty_lifeline(correct_answer, options):
     Returns:
     - list: A reduced list of answers containing only the correct answer and one randomly selected incorrect answer.
 
-    This function is designed to be used once per game session by a player who chooses to use the 50/50 lifeline. It randomly selects one incorrect answer to keep along with the correct answer and removes the other options.
+    This function is designed to be used once per game session by a player who chooses to use the 50/50 lifeline. It
+    randomly selects one incorrect answer to keep along with the correct answer and removes the other options.
     """
-    #------------------------
-    # Add your code here
-    #------------------------
-    raise NotImplementedError("This function is not implemented yet.")
-    #------------------------
+    # ------------------------
+    incorrect_options = [option for option in options if option != correct_answer]
 
-#---------------------------------------
+    if not incorrect_options:
+        return correct_answer
+
+    random_incorrect = random.choice(incorrect_options)
+    return [correct_answer, random_incorrect]
+
+    # ------------------------
+
+
+# ---------------------------------------
 
 def skip_question(allowed_skips):
     """
@@ -130,15 +165,16 @@ def skip_question(allowed_skips):
     Returns:
     - bool: True if the skip was successful (and a skip was available), False otherwise.
 
-    This function checks if the player has any skips available. If so, it decrements the allowed_skips counter and returns True, indicating the question can be skipped. If no skips are available, it returns False. This function should be called before presenting a new question to the player.
+    This function checks if the player has any skips available. If so, it decrements the allowed_skips counter and
+    returns True, indicating the question can be skipped. If no skips are available, it returns False. This function
+    should be called before presenting a new question to the player.
     """
-    #------------------------
-    # Add your code here
-    #------------------------
-    raise NotImplementedError("This function is not implemented yet.")
-    #------------------------
+    # ------------------------
+    if allowed_skips < 1:
+        return True
 
-#---------------------------------------
+    return False
 
+    # ------------------------
 
-
+# ---------------------------------------
